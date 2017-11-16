@@ -79,20 +79,29 @@
 	</table>
 
 	<form action="/myapp/list/jingles" method="post" enctype="multipart/form-data">
-        <p></p>
 
-        <p><label for="id_docfile">Select a file:</label> </p>
+		<br>
+        
+		<table border='1'><tr><td colspan="2" align="center">
+	        Upload de Jingle</td></tr><tr><td>
 
-        <p>
-            <input type="text" name="jnome" required id="jnome" />
-            <input type="text" name="jautor" required id="jautor" />
-            <input type="text" name="texto" required id="texto" />
-            <input type="text" name="categoria_id" required id="categoria_id" value='1'/>
-            <input type="text" name="usuario_id" required id="usuario_id"  value='1' />
-            <input type="file" name="docfile" required id="id_docfile" />
-        </p>
+	        
+	            nome: </td><td> <input type="text" name="jnome" required id="jnome" />
+	        </td></tr><tr><td>
+	            autor: </td><td> <input type="text" name="jautor" required id="jautor" />
+	        </td></tr><tr><td>
+	            texto: </td><td> <input type="text" name="texto" required id="texto" />
+	        </td></tr><tr><td>
+	            categoria: </td><td> <input type="text" name="categoria_id" required id="categoria_id" value='1'/>
+	        </td></tr><tr><td>
+	            usuario: </td><td> <input type="text" name="usuario_id" required id="usuario_id"  value='1' />
+	        </td></tr><tr><td>
+	            arquivo: </td><td> <input type="file" name="docfile" required id="id_docfile" />
+			</td></tr><tr><td colspan="2" align="center">
 
-        <p><input type="submit" value="Upload"/></p>
+	        	<input type="submit" value="Enviar"/>
+	        </td></tr>
+        </table>
     </form>
 
 </body>

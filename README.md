@@ -24,7 +24,7 @@ A aplicação é desenvolvida utilizando o conceito de web-service, a aplicaçã
 
 ## Requerimentos
 
-- Python3+ instalado
+- Python3.5+ instalado
 - Django instalado
 - Executar no prompt de comando:
 ```

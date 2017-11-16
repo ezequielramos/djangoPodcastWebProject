@@ -1,5 +1,7 @@
 # Podcast Web Project
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4556a7f57ffe4fc9812d07c9fd08483b)](https://www.codacy.com/app/ezequielramos/djangoPodcastWebProject?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ezequielramos/djangoPodcastWebProject&amp;utm_campaign=Badge_Grade)
+
 Aplicação WEB de um sistema de compartilhamento de arquivos de podcast (áudio) voltados ao meio acadêmico. 
 
 ## Objetivo

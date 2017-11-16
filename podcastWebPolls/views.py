@@ -15,7 +15,7 @@ def index(request):
 def rest(request, model, model_id):
 
 	if request.method == 'POST':
-		data = json.loads(request.body)
+		data = json.loads(request.body.decode('utf-8'))
 
 		u = model(**data)
 		u.save()

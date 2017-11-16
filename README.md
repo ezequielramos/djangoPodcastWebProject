@@ -22,6 +22,16 @@ A aplicação é desenvolvida utilizando o conceito de web-service, a aplicaçã
 - Ouvir Podcast
 - Visualizar informações do Podcast
 
+## Requerimentos
+
+- Python3+ instalado
+- Django instalado
+- Executar no prompt de comando:
+```
+$ python3 manage.py migrate
+$ python3 manage.py runserver
+```
+
 ## Créditos
 
 - Music: https://www.bensound.com

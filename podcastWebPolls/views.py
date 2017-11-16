@@ -21,14 +21,7 @@ def usuarios(request):
 		u = Usuario(**data)
 		u.save()
 
-		'''form = DocumentForm(request.POST, request.FILES)
-		if form.is_valid():
-		newdoc = Document(docfile=request.FILES['docfile'])
-		newdoc.save()'''
-
 		return HttpResponse('sucesso')
-
-
 
 	elif request.method == 'GET':
 
@@ -37,4 +30,4 @@ def usuarios(request):
 		for usuario in Usuario.objects.all():
 			usuarios.append(model_to_dict(usuario))
 
-		return HttpResponse(json.dumps(usuarios))
+		return HttpResponse(json.dumps(usuarios), content_type="application/json")

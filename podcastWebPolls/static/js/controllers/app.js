@@ -59,6 +59,6 @@ var PhoneListController = function($scope, $http) {
 
     _self.load();
 
-}
+};
 
 phonecatApp.controller('PhoneListController', PhoneListController);

@@ -21,3 +21,7 @@ A aplicação é desenvolvida utilizando o conceito de web-service, a aplicaçã
 - Pesquisa de Podcast
 - Ouvir Podcast
 - Visualizar informações do Podcast
+
+## Créditos
+
+- Music: https://www.bensound.com

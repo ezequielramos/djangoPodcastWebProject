@@ -7,7 +7,7 @@
 <body ng-controller="PhoneListController as controller">
 	<table border='1'>
 		<tr>
-			<td colspan=5 align='center'><font size='5'>Usuarios</font></td>
+			<td colspan=6 align='center'><font size='5'>Usuarios</font></td>
 		</tr>
 		<tr>
 			<th>ID</th>
@@ -15,6 +15,7 @@
 			<th>nome</th>
 			<th>senha</th>
 			<th>email</th>
+			<th>&nbsp;</th>
 		</tr>
 		<tr ng-repeat="user in controller.users">
 			<td>{{user.id}}</td>
@@ -22,10 +23,77 @@
 			<td>{{user.nome}}</td>
 			<td>{{user.senha}}</td>
 			<td>{{user.email}}</td>
+			<td><button ng-click="controller.deletarUsuario(user.id)">Deletar</button></td>
 		</tr>
 	</table>
 
-	<button ng-click="controller.botao()">botao</button>	
+	<button ng-click="controller.botao()">botao</button>
+
+	<br>
+	<br>
+
+	<table border='1'>
+		<tr>
+			<td colspan=3 align='center'><font size='5'>Categorias</font></td>
+		</tr>
+		<tr>
+			<th>ID</th>
+			<th>nome</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr ng-repeat="category in controller.categories">
+			<td>{{category.id}}</td>
+			<td>{{category.nome}}</td>
+			<td><button ng-click="controller.deletarCategoria(category.id)">Deletar</button></td>
+		</tr>
+	</table>
+
+	<br>
+	<br>
+
+	<table border='1'>
+		<tr>
+			<td colspan=8 align='center'><font size='5'>Jingles</font></td>
+		</tr>
+		<tr>
+			<th>ID</th>
+			<th>nome</th>
+			<th>autor</th>
+			<th>texto</th>
+			<th>usuario</th>
+			<th>categoria</th>
+			<th>link</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr ng-repeat="jingle in controller.jingles">
+			<td>{{jingle.id}}</td>
+			<td>{{jingle.jnome}}</td>
+			<td>{{jingle.jautor}}</td>
+			<td>{{jingle.texto}}</td>
+			<td>{{jingle.usuario_id}}</td>
+			<td>{{jingle.categoria_id}}</td>
+			<td><audio controls><source src="{{ jingle.url }}" type="audio/mpeg"></audio></td>
+
+			<td><button ng-click="controller.deletarJingle(jingle.id)">Deletar</button></td>
+		</tr>
+	</table>
+
+	<form action="/myapp/list/jingles" method="post" enctype="multipart/form-data">
+        <p></p>
+
+        <p><label for="id_docfile">Select a file:</label> </p>
+
+        <p>
+            <input type="text" name="jnome" required id="jnome" />
+            <input type="text" name="jautor" required id="jautor" />
+            <input type="text" name="texto" required id="texto" />
+            <input type="text" name="categoria_id" required id="categoria_id" value='1'/>
+            <input type="text" name="usuario_id" required id="usuario_id"  value='1' />
+            <input type="file" name="docfile" required id="id_docfile" />
+        </p>
+
+        <p><input type="submit" value="Upload"/></p>
+    </form>
 
 </body>
 </html>

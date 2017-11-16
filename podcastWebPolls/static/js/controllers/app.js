@@ -16,6 +16,20 @@ var PhoneListController = function($scope, $http) {
           _self.users = response.data;
       });
 
+      $http({
+          method: 'GET',
+          url: '/myapp/list/categorias'
+      }).then(function successCallback(response) {
+          _self.categories = response.data;
+      });
+
+      $http({
+          method: 'GET',
+          url: '/myapp/list/jingles'
+      }).then(function successCallback(response) {
+          _self.jingles = response.data;
+      });
+
     };
 
     _self.botao = function(){
@@ -27,6 +41,21 @@ var PhoneListController = function($scope, $http) {
         });
 
     };
+
+    _self.deletarUsuario = function(userId){
+        $http.delete('/myapp/list/usuarios/'+userId).then(function(response){
+            _self.load();
+        });
+    }
+
+    _self.deletarJingle = function(jingleId){
+        $http.delete('/myapp/list/jingles/'+jingleId).then(function(response){
+            _self.load();
+        },function(response){
+          alert(response.data.message);
+        });
+    }
+
 
     _self.load();
 

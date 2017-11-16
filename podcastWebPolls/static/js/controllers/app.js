@@ -26,7 +26,7 @@ var PhoneListController = function($scope, $http) {
             _self.load();
         });
 
-    }
+    };
 
     _self.load();
 

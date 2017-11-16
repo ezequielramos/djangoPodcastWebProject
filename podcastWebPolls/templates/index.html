@@ -1,0 +1,32 @@
+{% verbatim %}
+<html ng-app="phonecatApp">
+<head>
+  <script src="/static/js/libs/angular.min.js"></script>
+  <script src="/static/js/controllers/app.js"></script>
+</head>
+<body ng-controller="PhoneListController as controller">
+	<table border='1'>
+		<tr>
+			<td colspan=5 align='center'><font size='5'>Usuarios</font></td>
+		</tr>
+		<tr>
+			<th>ID</th>
+			<th>login</th>
+			<th>nome</th>
+			<th>senha</th>
+			<th>email</th>
+		</tr>
+		<tr ng-repeat="user in controller.users">
+			<td>{{user.id}}</td>
+			<td>{{user.login}}</td>
+			<td>{{user.nome}}</td>
+			<td>{{user.senha}}</td>
+			<td>{{user.email}}</td>
+		</tr>
+	</table>
+
+	<button ng-click="controller.botao()">botao</button>	
+
+</body>
+</html>
+{% endverbatim %}

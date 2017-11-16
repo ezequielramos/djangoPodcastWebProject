@@ -86,7 +86,15 @@ def jingles(request, jingleId=None):
 
 		if jingleId:
 			model_object = Jingle.objects.get(pk=jingleId)
-			retorno.append({'id':model_object.id,'jnome':model_object.jnome})
+			retorno = {
+				'id':model_object.id,
+				'jnome':model_object.jnome,
+				'url':model_object.docfile.url,
+				'categoria_id':model_object.categoria_id,
+				'usuario_id':model_object.usuario_id,
+				'jautor':model_object.jautor,
+				'texto':model_object.texto
+			}
 		else:
 			retorno = []
 

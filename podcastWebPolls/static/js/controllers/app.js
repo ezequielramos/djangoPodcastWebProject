@@ -3,9 +3,9 @@ var phonecatApp = angular.module('phonecatApp', []);
 
 // Define the `PhoneListController` controller on the `phonecatApp` module
 
-PhoneListController = function($scope, $http) {
+var PhoneListController = function($scope, $http) {
 
-    _self = this;
+    var _self = this;
 
     _self.load = function(){
 
@@ -20,7 +20,7 @@ PhoneListController = function($scope, $http) {
 
     _self.botao = function(){
 
-        data = {login:'teste',nome:'teste',senha:'teste',email:'teste'};
+        var data = {login:'teste',nome:'teste',senha:'teste',email:'teste'};
 
         $http.post('/myapp/list/usuarios', data).then(function(response){
             _self.load();

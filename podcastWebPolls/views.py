@@ -16,6 +16,8 @@ def usuarios(request):
 
 	if request.method == 'POST':
 
+		request.session['something'] = True
+
 		data = json.loads(request.body)
 
 		u = Usuario(**data)
@@ -24,6 +26,9 @@ def usuarios(request):
 		return HttpResponse('sucesso')
 
 	elif request.method == 'GET':
+
+		print("sessao")
+		print(request.session.get('something',False))
 
 		usuarios = []
 

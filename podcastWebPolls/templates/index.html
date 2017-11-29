@@ -1,109 +1,71 @@
 {% verbatim %}
-<html ng-app="phonecatApp">
-<head>
-  <script src="/static/js/libs/angular.min.js"></script>
-  <script src="/static/js/controllers/app.js"></script>
-</head>
-<body ng-controller="PhoneListController as controller">
-	<table border='1'>
-		<tr>
-			<td colspan=6 align='center'><font size='5'>Usuarios</font></td>
-		</tr>
-		<tr>
-			<th>ID</th>
-			<th>login</th>
-			<th>nome</th>
-			<th>senha</th>
-			<th>email</th>
-			<th>&nbsp;</th>
-		</tr>
-		<tr ng-repeat="user in controller.users">
-			<td>{{user.id}}</td>
-			<td>{{user.login}}</td>
-			<td>{{user.nome}}</td>
-			<td>{{user.senha}}</td>
-			<td>{{user.email}}</td>
-			<td><button ng-click="controller.deletarUsuario(user.id)">Deletar</button></td>
-		</tr>
-	</table>
-
-	<button ng-click="controller.botao()">botao</button>
-
-	<br>
-	<br>
-
-	<table border='1'>
-		<tr>
-			<td colspan=3 align='center'><font size='5'>Categorias</font></td>
-		</tr>
-		<tr>
-			<th>ID</th>
-			<th>nome</th>
-			<th>&nbsp;</th>
-		</tr>
-		<tr ng-repeat="category in controller.categories">
-			<td>{{category.id}}</td>
-			<td>{{category.nome}}</td>
-			<td><button ng-click="controller.deletarCategoria(category.id)">Deletar</button></td>
-		</tr>
-	</table>
-
-	<br>
-	<br>
-
-	<table border='1'>
-		<tr>
-			<td colspan=8 align='center'><font size='5'>Jingles</font></td>
-		</tr>
-		<tr>
-			<th>ID</th>
-			<th>nome</th>
-			<th>autor</th>
-			<th>texto</th>
-			<th>usuario</th>
-			<th>categoria</th>
-			<th>link</th>
-			<th>&nbsp;</th>
-		</tr>
-		<tr ng-repeat="jingle in controller.jingles">
-			<td>{{jingle.id}}</td>
-			<td>{{jingle.jnome}}</td>
-			<td>{{jingle.jautor}}</td>
-			<td>{{jingle.texto}}</td>
-			<td>{{jingle.usuario_id}}</td>
-			<td>{{jingle.categoria_id}}</td>
-			<td><audio controls><source src="{{ jingle.url }}" type="audio/mpeg"></audio></td>
-
-			<td><button ng-click="controller.deletarJingle(jingle.id)">Deletar</button></td>
-		</tr>
-	</table>
-
-	<form action="/myapp/list/jingles" method="post" enctype="multipart/form-data">
-
-		<br>
-        
-		<table border='1'><tr><td colspan="2" align="center">
-	        Upload de Jingle</td></tr><tr><td>
-
-	        
-	            nome: </td><td> <input type="text" name="jnome" required id="jnome" />
-	        </td></tr><tr><td>
-	            autor: </td><td> <input type="text" name="jautor" required id="jautor" />
-	        </td></tr><tr><td>
-	            texto: </td><td> <input type="text" name="texto" required id="texto" />
-	        </td></tr><tr><td>
-	            categoria: </td><td> <input type="text" name="categoria_id" required id="categoria_id" value='1'/>
-	        </td></tr><tr><td>
-	            usuario: </td><td> <input type="text" name="usuario_id" required id="usuario_id"  value='1' />
-	        </td></tr><tr><td>
-	            arquivo: </td><td> <input type="file" name="docfile" required id="id_docfile" />
-			</td></tr><tr><td colspan="2" align="center">
-
-	        	<input type="submit" value="Enviar"/>
-	        </td></tr>
-        </table>
-    </form>
-
-</body>
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+   <head>
+      <script src="/static/js/libs/angular.min.js"></script>
+      <script src="/static/js/controllers/app.js"></script>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Podcasts</title>
+      <link rel="shortcut icon" href="/static/images/logo.png">
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css" />
+      <link rel="stylesheet" href="/static/css/styles.css">
+      <style>
+         #view-source {
+         position: fixed;
+         display: block;
+         right: 0;
+         bottom: 0;
+         margin-right: 40px;
+         margin-bottom: 40px;
+         z-index: 900;
+         }
+      </style>
+   </head>
+   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base" ng-controller="PhoneListController as controller">
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+         <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+               <h1>Podcasts</h1>
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+               <a href="index" class="mdl-layout__tab is-active">HOME</a>
+               <a href="cadastroPodcast" class="mdl-layout__tab">Cadastro</a>
+               <a href="favoritos" class="mdl-layout__tab">Favoritos</a>
+               <a href="votosPodcast" class="mdl-layout__tab">Votos</a>
+            </div>
+         </header>
+         <main class="mdl-layout__content" ng-repeat="jingle in controller.jingles">
+            <div class="mdl-layout__tab-panel is-active" id="overview">
+               <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white" ng-click="controller.teste(jingle.id)">
+                     <i class="material-icons" ng-if="controller.playing!=jingle.id">play_circle_filled</i>
+                     <i class="material-icons" ng-if="controller.playing==jingle.id">pause_circle_filled</i>                     
+                  </header>
+                  <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                     <div class="mdl-card__supporting-text">
+                        <h4>{{jingle.jnome}}</h4>
+                        
+                        {{jingle.texto}}<br><br>
+                        <audio controls id="jingle-{{jingle.id}}"><source src="{{ jingle.url }}" type="audio/mpeg"></audio>
+                     </div>
+                     <div class="mdl-card__actions">
+                        <b>Autor:</b> {{jingle.jautor}} <br>
+                        <b>Categoria:</b> {{jingle.categoria_id}}
+                     </div>
+                  </div>
+               </section>
+            </div>
+         </main>
+      </div>
+      <a href="login" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">LOGIN</a>
+      <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+   </body>
 </html>
 {% endverbatim %}

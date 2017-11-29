@@ -6,10 +6,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import os
 
-def index(request):
+def webpage(request, webpage):
 	return render(
 		request,
-		'index.html'
+		webpage + '.html'
 	)
 
 def rest(request, model, model_id):
@@ -38,7 +38,7 @@ def rest(request, model, model_id):
 	elif request.method == 'DELETE':
 
 		if not model_id:
-			return HttpResponse('{"success":false}', content_type="application/json")
+			return HttpResponse('{"success":false, "message":"nao foi enviado id para o delete"}', content_type="application/json", status=400)
 		else:
 
 			model_object = model.objects.get(pk=model_id)

@@ -11,21 +11,21 @@ var PhoneListController = function($scope, $http) {
 
       $http({
           method: 'GET',
-          url: '/myapp/list/usuarios'
+          url: '/list/usuarios'
       }).then(function successCallback(response) {
           _self.users = response.data;
       });
 
       $http({
           method: 'GET',
-          url: '/myapp/list/categorias'
+          url: '/list/categorias'
       }).then(function successCallback(response) {
           _self.categories = response.data;
       });
 
       $http({
           method: 'GET',
-          url: '/myapp/list/jingles'
+          url: '/list/jingles'
       }).then(function successCallback(response) {
           _self.jingles = response.data;
       });
@@ -36,26 +36,42 @@ var PhoneListController = function($scope, $http) {
 
         var data = {login:'teste',nome:'teste',senha:'teste',email:'teste'};
 
-        $http.post('/myapp/list/usuarios', data).then(function(response){
+        $http.post('/list/usuarios', data).then(function(response){
             _self.load();
         });
 
     };
 
+    _self.teste = function(a){
+
+      if(_self.playing){
+        document.getElementById('jingle-'+_self.playing).pause();
+      }
+
+      if(a==_self.playing){
+        _self.playing = null
+        return;
+      }
+
+      _self.playing = a;
+      document.getElementById('jingle-'+_self.playing).play();
+    }
+
     _self.deletarUsuario = function(userId){
-        $http.delete('/myapp/list/usuarios/'+userId).then(function(response){
+        $http.delete('/list/usuarios/'+userId).then(function(response){
             _self.load();
         });
     };
 
     _self.deletarJingle = function(jingleId){
-        $http.delete('/myapp/list/jingles/'+jingleId).then(function(response){
+        $http.delete('/list/jingles/'+jingleId).then(function(response){
             _self.load();
         },function(response){
           alert(response.data.message);
         });
     };
 
+    _self.playing = null;
 
     _self.load();
 

@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^list/$', views.index, name='list'),
+    url(r'^front/(?P<webpage>\w+)$', views.webpage, name='webpage'),
     url(r'^list/usuarios$', views.usuarios, name='usuarios'),
     url(r'^list/usuarios/(?P<userId>\w+)$', views.usuarios, name='usuarios'),
     url(r'^list/categorias$', views.categorias, name='categorias'),

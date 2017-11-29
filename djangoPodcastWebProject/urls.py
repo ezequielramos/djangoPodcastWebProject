@@ -7,6 +7,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^myapp/', include('podcastWebPolls.urls')),
-	url(r'^$', RedirectView.as_view(url='/myapp/list/', permanent=True)),
+	url(r'^', include('podcastWebPolls.urls')),
+	url(r'^$', RedirectView.as_view(url='/front/index', permanent=True)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

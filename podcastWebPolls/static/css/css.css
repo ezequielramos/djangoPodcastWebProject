@@ -1,0 +1,39 @@
+  body {
+      font: 14px Lato, sans-serif;
+      line-height: 1.8;
+      color: #818181;
+            
+
+  }
+  .navbar {
+      background-color: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%)!important;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #616161 !important;
+      background-color: #fff !important;
+  }
+  .navbar-default .navbar-toggle {
+      color: #fff !important;
+  }
+blockquote {
+  font-family: Arial,sans-serif,"Helvetica Neue",Helvetica;
+  padding: 11.5px 23px;
+  margin: 0 0 23px;
+  font-size: 15px;
+  font-color:#777;
+  border-left: 5px solid #eeeeee;
+}
+h1,
+h2,
+h3,
+h4{
+    font-color:#777;
+}
+
+
+

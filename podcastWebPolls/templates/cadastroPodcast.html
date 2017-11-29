@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+      <title>Cadastro</title>
+      <link rel="shortcut icon" href="/static/images/logo.png">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-red.min.css">
+      <link rel="stylesheet" href="/static/css/csspages.css">
+      <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+      <style>
+         #view-source {
+         position: fixed;
+         display: block;
+         right: 0;
+         bottom: 0;
+         margin-right: 40px;
+         margin-bottom: 40px;
+         z-index: 900;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+         <div class="demo-ribbon"></div>
+         <main class="demo-main mdl-layout__content">
+            <div class="demo-container mdl-grid">
+               <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+               <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+                  <div class="demo-crumbs mdl-color-text--grey-500">
+                     CADASTRO
+                  </div>
+                  <h2 class="display-1">Upload de Podcasts</h2>
+                  <br>
+                  <form action="enviar.php" method="post">
+                     <label for="nome" class="form-control-label">Nome:</label>
+                     <input type="text" name="nome" id="nome" class="form-control"> <br>
+                     <label for="autor" class="form-control-label">Autor:</label>
+                     <input type="text" name="autor" id="autor" class="form-control"> <br>
+                     <label for="categoria">Categoria:</label>
+                     <select class="form-control" id="categoria">
+                        <option>Atualidades</option>
+                        <option>Artes</option>
+                        <option>Biologia</option>
+                        <option>Espanhol</option>
+                        <option>Inglês</option>
+                        <option>Geografia</option>
+                        <option>História</option>
+                        <option>Literatura</option>
+                        <option>Matemática</option>
+                     </select>
+                     <br>
+                     <label for="descricao" class="form-control-label">Descrição: </label>
+                     <textarea name="descricao" id="descricao" class="form-control" rows="5" required></textarea>
+                     <br>
+                     <label class="btn btn-default btn-file">Fazer Upload 
+                     <input type="file" style="display: none;">
+                     </label><br><br><br><br>
+                     <button type="reset" class="btn btn-primary" name="limpar">Limpar</button>
+                     <input type="submit" class="btn btn-primary" value="Enviar">
+                  </form>
+               </div>
+               </footer>
+            </div>
+         </main>
+      </div>
+      <a href="index" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">HOME</a>
+      <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+   </body>
+</html>

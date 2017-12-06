@@ -38,8 +38,6 @@
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
                <a href="index" class="mdl-layout__tab is-active">HOME</a>
                <a href="cadastroPodcast" class="mdl-layout__tab" ng-if="controller.login">Cadastro</a>
-               <!--<a href="favoritos" class="mdl-layout__tab" ng-if="controller.login">Favoritos</a>
-               <a href="votosPodcast" class="mdl-layout__tab" ng-if="controller.login">Votos</a>-->
             </div>
          </header>
          <main class="mdl-layout__content" ng-repeat="jingle in controller.jingles">
@@ -51,14 +49,25 @@
                   </header>
                   <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                      <div class="mdl-card__supporting-text">
-                        <h4>{{jingle.jnome}} <a style="cursor:pointer;" class="material-icons" ng-if="controller.login == jingle.usuario_id" ng-click="controller.deletarJingle(jingle.id)">delete_forever</a></h4> 
+                        <h4>
+                           <table width='100%'><tr><td>
+                              {{jingle.jnome}}</td><td align='right'>
+                              <i style="cursor:pointer;" class="material-icons" ng-click="controller.curtir(jingle)" ng-if="controller.login && jingle.favoritado">star</i>
+                              <i style="cursor:pointer;" class="material-icons" ng-click="controller.curtir(jingle)" ng-if="controller.login && !jingle.favoritado">star_border</i>
+                              <a style="cursor:pointer;" class="material-icons" ng-if="controller.login == jingle.usuario_id" ng-click="controller.deletarJingle(jingle.id)">delete_forever</a>
+                           </td></tr></table>
+                        </h4>
+
                         
                         {{jingle.texto}}<br><br>
                         <audio controls id="jingle-{{jingle.id}}"><source src="{{ jingle.url }}" type="audio/mpeg"></audio>
                      </div>
                      <div class="mdl-card__actions">
-                        <b>Autor:</b> {{jingle.jautor}} <br>
-                        <b>Categoria:</b> {{jingle.categoria}}
+                        <table width='100%'><tr><td>
+                           <b>Autor:</b> {{jingle.jautor}}
+                        </td></tr><tr><td>
+                           <b>Categoria:</b> {{jingle.categoria}}</td><td align='right'>{{jingle.favoritos}} favoritos</td>
+                        </td></tr></table>
                      </div>
                   </div>
                </section>

@@ -10,7 +10,6 @@ var JingleController = function($scope, $http) {
 			url: '/list/categorias'
 		}).then(function successCallback(response) {
 			_self.categorias = response.data;
-			console.info(_self.categorias);
 		});
     };
 

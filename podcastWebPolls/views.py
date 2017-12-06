@@ -79,6 +79,47 @@ def categorias(request, categoryId=None):
 	return rest(request,Categoria,categoryId)
 
 @csrf_exempt
+def favorito(request, favoritoId=None):
+
+	if request.method == 'POST':
+		data = json.loads(request.body.decode('utf-8'))
+
+		u = Favorito(**data)
+		u.save()
+
+		return HttpResponse('{"success":true}', content_type="application/json")
+
+	elif request.method == 'GET':
+
+		if favoritoId:
+			favoritos = Favorito.objects.all()
+			favoritos = favoritos.filter(usuario_id=request.session.get('user',0), jingle_id=favoritoId)
+
+			retorno = {"id":0}
+
+			for favorito in favoritos:
+				retorno = model_to_dict(favorito)
+
+		else:
+			retorno = []
+
+			for model_object in Favorito.objects.all():
+				retorno.append(model_to_dict(model_object))
+
+		return HttpResponse(json.dumps(retorno), content_type="application/json")
+
+	elif request.method == 'DELETE':
+
+		if not favoritoId:
+			return HttpResponse('{"success":false, "message":"nao foi enviado id para o delete"}', content_type="application/json", status=400)
+		else:
+
+			model_object = Favorito.objects.get(pk=favoritoId)
+			model_object.delete()
+
+			return HttpResponse('{"success":true}', content_type="application/json")
+
+@csrf_exempt
 def jingles(request, jingleId=None):
 	#return rest(request,Jingle,jingleId)
 
@@ -113,7 +154,8 @@ def jingles(request, jingleId=None):
 				'categoria': model_object.categoria.nome,
 				'usuario_id':model_object.usuario_id,
 				'jautor':model_object.jautor,
-				'texto':model_object.texto
+				'texto':model_object.texto,
+				'favoritos': len(Favorito.objects.filter(jingle_id=model_object.id))
 			}
 		else:
 			retorno = []
@@ -128,7 +170,8 @@ def jingles(request, jingleId=None):
 					'categoria': model_object.categoria.nome,
 					'usuario_id':model_object.usuario_id,
 					'jautor':model_object.jautor,
-					'texto':model_object.texto
+					'texto':model_object.texto,
+					'favoritos': len(Favorito.objects.filter(jingle_id=model_object.id))
 				})
 
 		return HttpResponse(json.dumps(retorno), content_type="application/json")

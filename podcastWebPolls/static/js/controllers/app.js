@@ -23,11 +23,37 @@ var PhoneListController = function($scope, $http) {
           _self.categories = response.data;
       });
 
+      _self.curtir = function(jingle){
+
+          temp = jingle.favoritado;
+
+          jingle.favoritado = !jingle.favoritado;
+
+          if(jingle.favoritado){
+              $http.post('/list/favorito', {usuario_id:_self.login,jingle_id:jingle.id}).then(function(response){
+                _self.load();
+              });
+          }else{
+              $http.delete('/list/favorito/' + temp, {}).then(function(response){
+                _self.load();
+              });
+          }
+      };
+
       $http({
           method: 'GET',
           url: '/list/jingles'
       }).then(function successCallback(response) {
           _self.jingles = response.data;
+          _self.jingles.forEach(function(eachJingle){
+              eachJingle.favoritado = false;
+              $http({
+                  method: 'GET',
+                  url: '/list/favorito/' + eachJingle.id
+              }).then(function successCallback(response) {
+                  eachJingle.favoritado = response.data.id;
+              });
+          });
       });
 
       $http({

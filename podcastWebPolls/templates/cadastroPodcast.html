@@ -1,7 +1,11 @@
+{% verbatim %}
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="jingleApp">
    <head>
       <meta charset="utf-8">
+      <script src="/static/js/libs/angular.min.js"></script>
+      <script src="/static/js/libs/angular-bootstrap-file-field.min.js"></script>
+      <script src="/static/js/controllers/jingles.js"></script>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -24,7 +28,7 @@
          }
       </style>
    </head>
-   <body>
+   <body ng-controller="JingleController as controller">
       <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
          <div class="demo-ribbon"></div>
          <main class="demo-main mdl-layout__content">
@@ -36,30 +40,23 @@
                   </div>
                   <h2 class="display-1">Upload de Podcasts</h2>
                   <br>
-                  <form action="enviar.php" method="post">
+                  <form ng-submit="controller.saveJingle()" name="jingleForm" >
                      <label for="nome" class="form-control-label">Nome:</label>
-                     <input type="text" name="nome" id="nome" class="form-control"> <br>
-                     <label for="autor" class="form-control-label">Autor:</label>
-                     <input type="text" name="autor" id="autor" class="form-control"> <br>
+                     <input type="text" name="nome" ng-model="controller.jingle.jnome" class="form-control"> <br>
+                     <label for="autor" ng-model="jnome" class="form-control-label">Autor:</label>
+                     <input type="text" name="autor" ng-model="controller.jingle.jautor" class="form-control"> <br>
                      <label for="categoria">Categoria:</label>
-                     <select class="form-control" id="categoria">
-                        <option>Atualidades</option>
-                        <option>Artes</option>
-                        <option>Biologia</option>
-                        <option>Espanhol</option>
-                        <option>Inglês</option>
-                        <option>Geografia</option>
-                        <option>História</option>
-                        <option>Literatura</option>
-                        <option>Matemática</option>
+                     <select class="form-control" ng-model="controller.jingle.categoria_id">
+                        <option ng-repeat='categoria in controller.categorias' value='{{categoria.id}}'>{{categoria.nome}}</option>
                      </select>
                      <br>
                      <label for="descricao" class="form-control-label">Descrição: </label>
-                     <textarea name="descricao" id="descricao" class="form-control" rows="5" required></textarea>
+                     <textarea name="descricao" ng-model="controller.jingle.texto" class="form-control" rows="5" required></textarea>
                      <br>
-                     <label class="btn btn-default btn-file">Fazer Upload 
-                     <input type="file" style="display: none;">
-                     </label><br><br><br><br>
+                     <label><file-field class="btn btn-primary" ng-model="controller.file">Selecionar Arquivo</file-field></label>                     
+                     <input disabled type="text" value="{{ controller.file.name }}" class="form-control">
+                     <br>
+                     <br><br><br><br>
                      <button type="reset" class="btn btn-primary" name="limpar">Limpar</button>
                      <input type="submit" class="btn btn-primary" value="Enviar">
                   </form>
@@ -72,3 +69,4 @@
       <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
    </body>
 </html>
+{% endverbatim %}

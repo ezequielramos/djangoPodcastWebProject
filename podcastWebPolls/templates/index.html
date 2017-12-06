@@ -6,6 +6,7 @@
       <script src="/static/js/controllers/app.js"></script>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
       <title>Podcasts</title>
       <link rel="shortcut icon" href="/static/images/logo.png">
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -36,9 +37,9 @@
             </div>
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
                <a href="index" class="mdl-layout__tab is-active">HOME</a>
-               <a href="cadastroPodcast" class="mdl-layout__tab">Cadastro</a>
-               <a href="favoritos" class="mdl-layout__tab">Favoritos</a>
-               <a href="votosPodcast" class="mdl-layout__tab">Votos</a>
+               <a href="cadastroPodcast" class="mdl-layout__tab" ng-if="controller.login">Cadastro</a>
+               <!--<a href="favoritos" class="mdl-layout__tab" ng-if="controller.login">Favoritos</a>
+               <a href="votosPodcast" class="mdl-layout__tab" ng-if="controller.login">Votos</a>-->
             </div>
          </header>
          <main class="mdl-layout__content" ng-repeat="jingle in controller.jingles">
@@ -46,25 +47,26 @@
                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                   <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white" ng-click="controller.teste(jingle.id)">
                      <i class="material-icons" ng-if="controller.playing!=jingle.id">play_circle_filled</i>
-                     <i class="material-icons" ng-if="controller.playing==jingle.id">pause_circle_filled</i>                     
+                     <i class="material-icons" ng-if="controller.playing==jingle.id">pause_circle_filled</i>
                   </header>
                   <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                      <div class="mdl-card__supporting-text">
-                        <h4>{{jingle.jnome}}</h4>
+                        <h4>{{jingle.jnome}} <a style="cursor:pointer;" class="material-icons" ng-if="controller.login == jingle.usuario_id" ng-click="controller.deletarJingle(jingle.id)">delete_forever</a></h4> 
                         
                         {{jingle.texto}}<br><br>
                         <audio controls id="jingle-{{jingle.id}}"><source src="{{ jingle.url }}" type="audio/mpeg"></audio>
                      </div>
                      <div class="mdl-card__actions">
                         <b>Autor:</b> {{jingle.jautor}} <br>
-                        <b>Categoria:</b> {{jingle.categoria_id}}
+                        <b>Categoria:</b> {{jingle.categoria}}
                      </div>
                   </div>
                </section>
             </div>
          </main>
       </div>
-      <a href="login" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">LOGIN</a>
+      <a href="login" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" ng-if="!controller.login">LOGIN</a>
+      <a ng-click="controller.logout()" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" ng-if="controller.login">LOGOUT</a>
       <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
    </body>
 </html>

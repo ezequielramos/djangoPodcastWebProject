@@ -46,15 +46,32 @@ def rest(request, model, model_id):
 
 			return HttpResponse('{"success":true}', content_type="application/json")
 
+@csrf_exempt
+def logout(request):
+	request.session['user'] = 0
+	return HttpResponse('{"success":true}', content_type="application/json")
+
+@csrf_exempt
+def login(request):
+
+	if request.method == 'POST':
+		usuarios = Usuario.objects.all()
+
+		data = json.loads(request.body.decode('utf-8'))	
+
+		try:
+			usuario = usuarios.filter(login=data["login"],senha=data["senha"])[0].id
+
+			request.session['user'] = usuario
+
+			return HttpResponse('{"success":true, "id":' + str(usuario) + '}', content_type="application/json")
+		except:
+			return HttpResponse('{"success":false, "message":"Usuario nao valido ou senha incorreta."}', content_type="application/json", status=400)
+	elif request.method == 'GET':
+		return HttpResponse('{"success":true, "id":' + str(request.session.get('user',0)) + '}', content_type="application/json")
 
 @csrf_exempt
 def usuarios(request, userId=None):
-
-	request.session['something'] = True
-
-	print("sessao")
-	print(request.session.get('something',False))
-
 	return rest(request,Usuario,userId)
 
 @csrf_exempt
@@ -70,8 +87,10 @@ def jingles(request, jingleId=None):
 
 		parameters = {}
 
-		for naosei in request.POST:
-			parameters[naosei] = request.POST[naosei]
+		for eachPost in request.POST:
+			parameters[eachPost] = request.POST[eachPost]
+
+		parameters['usuario_id'] = request.session.get('user',0)
 
 		newdoc = Jingle(**parameters, docfile=request.FILES['docfile'])
 		newdoc.save()
@@ -91,6 +110,7 @@ def jingles(request, jingleId=None):
 				'jnome':model_object.jnome,
 				'url':model_object.docfile.url,
 				'categoria_id':model_object.categoria_id,
+				'categoria': model_object.categoria.nome,
 				'usuario_id':model_object.usuario_id,
 				'jautor':model_object.jautor,
 				'texto':model_object.texto
@@ -105,6 +125,7 @@ def jingles(request, jingleId=None):
 					'jnome':model_object.jnome,
 					'url':model_object.docfile.url,
 					'categoria_id':model_object.categoria_id,
+					'categoria': model_object.categoria.nome,
 					'usuario_id':model_object.usuario_id,
 					'jautor':model_object.jautor,
 					'texto':model_object.texto

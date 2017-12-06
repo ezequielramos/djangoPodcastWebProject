@@ -4,6 +4,7 @@
       <meta charset="utf-8">
       <script src="/static/js/libs/angular.min.js"></script>
       <script src="/static/js/controllers/user.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
       <title>Cadastro</title>
       <link rel="shortcut icon" href="/static/images/logo.png">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
@@ -33,10 +34,10 @@
                  
                   <form ng-submit="controller.login()" name="loginForm" >
                      <label for="login" class="form-control-label">Login:</label>
-                     <input type="text" name="login" id="login" class="form-control"> <br>
+                     <input type="text" name="login" id="login" ng-model="controller.user.login" class="form-control"> <br>
                      <div class="form-group">
                         <label for="pwd">Senha:</label>
-                        <input type="password" class="form-control" id="pwd" name="pwd">
+                        <input type="password" class="form-control" ng-model="controller.user.senha" name="pwd">
                      </div>
                      <br>
                      <button class="btn btn-lg btn-primary btn-block" type="submit" value="Enviar">Login</button>

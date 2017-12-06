@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     url(r'^front/(?P<webpage>\w+)$', views.webpage, name='webpage'),
+    url(r'^list/login$', views.login, name='login'),
+    url(r'^list/logout$', views.logout, name='logout'),
     url(r'^list/usuarios$', views.usuarios, name='usuarios'),
     url(r'^list/usuarios/(?P<userId>\w+)$', views.usuarios, name='usuarios'),
     url(r'^list/categorias$', views.categorias, name='categorias'),

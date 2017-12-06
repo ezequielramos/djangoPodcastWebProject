@@ -30,6 +30,13 @@ var PhoneListController = function($scope, $http) {
           _self.jingles = response.data;
       });
 
+      $http({
+          method: 'GET',
+          url: '/list/login'
+      }).then(function successCallback(response) {
+          _self.login = response.data.id;
+      });
+
     };
 
     _self.botao = function(){
@@ -40,6 +47,12 @@ var PhoneListController = function($scope, $http) {
             _self.load();
         });
 
+    };
+
+    _self.logout = function(){
+        $http.post('/list/logout', {}).then(function(response){
+            _self.load();
+        });
     };
 
     _self.teste = function(a){

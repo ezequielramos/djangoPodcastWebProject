@@ -1,7 +1,4 @@
-// Define the `userApp` module
 var userApp = angular.module('userApp', []);
-
-// Define the `UserController` controller on the `userApp` module
 
 var UserController = function($scope, $http) {
 
@@ -10,12 +7,16 @@ var UserController = function($scope, $http) {
     _self.saveUser = function(){
 
         $http.post('/list/usuarios', _self.user).then(function(response){
-            alert("salvo com sucesso");
+            document.location.href = 'login'
         });
     }
 
     _self.login = function(){
-    	console.info('aaa');
+    	$http.post('/list/login', _self.user).then(function(response){
+            document.location.href = 'index'
+        },function(response){
+            alert(response.data.message);
+        });
     }
 
 };
